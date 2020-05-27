@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH --job-name=PUSH
+#SBATCH --ntasks=1                      # 1 cores
+#SBATCH --time=00:10:00                 # Run time in hh:mm:ss
+#SBATCH --error=push.err
+#SBATCH --output=push.out
+
+cd /work/swanson/jingchao/wrf_Qatar/data/images
+
+folder=`find ./ -type d -name "1*" | sort -nr | head -1 | cut -d / -f 2`
+scp -qr $folder esmc@meteo.unl.edu:/home/esmc/qatar/
